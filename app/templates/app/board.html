@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление синтезированными данными</title>
+
+</head>
+<style>
+    body{
+        width:100%;
+        height:100%;
+
+        background-color:#E0FFFF!important;
+    }
+    table {
+            table-layout: fixed
+            width:100%;
+            min-height:500px;
+
+    }
+    thead,tr{
+    width:100%;
+    border-bottom:#E0FFFF solid 1px;
+    }
+    th{
+      width:12%;
+      max-width:15%;
+      padding:10px;
+      border-right:#E0FFFF solid 1px;
+    }
+    .st-hidden{
+           display: none !important;
+    }
+    #saver{
+          text-align:center;
+    }
+</style>
+<body>
+<div class="container-fluid">
+     <br>
+     <br>
+    <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Panel</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" style="position:absolute;right:0px;top:10%" href="/logout">{{request.session.user_fio}},Выйти</a>
+        </li>
+
+      </ul>
+
+
+    </div>
+  </div>
+</nav>
+
+   <h3 id="saver" class="st-hidden">Изменения сохранены!</h3>
+    <center><H1>Управление синтезированными данными</H1></center>
+   <table class="table table-hover table-primary">
+
+    <thead>
+
+      <tr>
+       {% for k in data.0.keys %}
+
+         {% if k != 'id' %}
+
+          <th scope="col">
+              {{k}}
+          </th>
+
+          {% endif %}
+
+       {% endfor %}
+           </tr>
+
+    </thead>
+
+    <tbody>
+     {% for user in data %}
+
+
+
+      <tr>
+       {% for k,v in user.items %}
+
+         {% if k != 'id' %}
+            {% if k == 'Статус' %}
+
+              <th>
+                  <select id="{{user.id}}" class="form-control status">
+                    <option {% if v == 'Не в работе' %} selected {% endif %}>Не в работе</option>
+                    <option {% if v == 'В работе' %} selected {% endif %}>В работе</option>
+                    <option {% if v == 'Отказ' %} selected {% endif %}>Отказ</option>
+                    <option {% if v == 'Сделка закрыта' %} selected {% endif %}>Сделка закрыта</option>
+                  </select>
+
+              </th>
+
+            {% else %}
+              <th scope="row">{{v}}</th>
+            {% endif %}
+
+         {% endif %}
+
+       {% endfor %}
+           </tr>
+
+
+    {% endfor %}
+    </tbody>
+
+   </table>
+
+</div>
+
+
+</body>
+<footer>
+    {%include "app/includes/scripts.html"%}
+</footer>
+</html>

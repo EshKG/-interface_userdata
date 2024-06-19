@@ -1,0 +1,27 @@
+   <table>
+
+    <thead>
+     {% for user in data %}
+      <tr>
+       {% for k,v in user.items %}
+
+         <th>{{k}}</th>
+
+       {% endfor %}
+           </tr>
+    {% endfor %}
+    </thead>
+
+    <tbody>
+     {% for user in data %}
+      <tr>
+       {% for k,v in user.items %}
+
+         <th>{{v}}</th>
+
+       {% endfor %}
+           </tr>
+    {% endfor %}
+    </tbody>
+
+   </table>
